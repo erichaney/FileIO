@@ -8,12 +8,13 @@ class Examples
 {
     static void greeting()
     {
+        System.out.println("Enter your name.");
         Scanner s = new Scanner(System.in);
 
-        System.out.println("Enter your name.");
         String username = s.nextLine();
 
         System.out.println("Hello " + username);
+
         s.close();
     }
 
@@ -22,11 +23,11 @@ class Examples
         File f = new File("userinfo.txt");
         Scanner s = new Scanner(f);
 
-        while(s.hasNextLine())
+        while (s.hasNextLine())
         {
-            String data = s.nextLine();
+            String line = s.nextLine();
 
-            System.out.println(data);
+            System.out.println(line);
         }
 
         s.close();
@@ -38,48 +39,49 @@ class Examples
         Scanner s = new Scanner(f);
         ArrayList<String> data = new ArrayList<String>();
 
+        // Read the data from the text file into the arraylist
         while (s.hasNext())
         {
-            // store the next word into the arraylist
-            data.add(s.next());
-
+            data.add(s.next()); //put the next word in the arraylist
         }
 
+        System.out.println("Please enter a new password.");
         Scanner keyboardScanner = new Scanner(System.in);
 
-        System.out.println("Please enter a new password.");
         String newPassword = keyboardScanner.next();
+
         data.set(3, newPassword);
 
         PrintStream ps = new PrintStream(f);
 
-        // Print each line of the arraylist to the file
+        // Write each word of the arraylist to the text file
+
         for (int i = 0; i < data.size(); i += 2)
         {
-            ps.println(data.get(i) + " " + data.get(i+1));
+            ps.println(data.get(i) + " " + data.get(i + 1));
         }
 
         s.close();
         keyboardScanner.close();
     }
 
-    static void getWords(int wordlength) throws FileNotFoundException
+    static void getWords(int wordLength) throws FileNotFoundException
     {
         File f = new File("frankenstein.txt");
-        File output = new File("words.txt");
-
         Scanner s = new Scanner(f);
 
-        while (s.hasNext())
+        while(s.hasNext())
         {
             String word = s.next();
 
-            if (word.length() == wordlength)
+            if (word.length() == wordLength)
             {
                 System.out.println(word);
             }
         }
-
+        
         s.close();
     }
+
+    
 }
